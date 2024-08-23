@@ -5,14 +5,18 @@ const subtractButton = document.querySelector('.subtract--js')
 let glasses = 0;
 
 const key = new Date().toISOString().slice(0,10);
+
+
 if (localStorage.getItem(key)){
-glasses = parseInt(localStorage.getItem(key));
+    glasses = parseInt(localStorage.getItem(key))
 }
 
-const setCounterValue =  (value)=>{
-    counterValue.innerHTML=value;
+
+const setCounterValue = (value)=>{
+    counterValue.innerHTML= value;
     localStorage.setItem(key, value)
 }
+setCounterValue(glasses)
 
 addButton.addEventListener('click',()=>{
     glasses = glasses + 1;
