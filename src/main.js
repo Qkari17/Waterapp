@@ -1,20 +1,33 @@
 const counterValue = document.querySelector('.counter--js');
 const addButton = document.querySelector('.add--js');
-const subtractButton = document.querySelector('.subtract--js')
+const subtractButton = document.querySelector('.subtract--js');
+const historyPage = document.querySelector('.historyPage--js');
+const historyButton = document.querySelector('.history--js')
 
 let glasses = 0;
 
 const key = new Date().toISOString().slice(0,10);
 
 
+
 if (localStorage.getItem(key)){
     glasses = parseInt(localStorage.getItem(key))
 }
-
+function iterateLocalStorage() {
+    if (!historyPage) return; 
+    historyPage.innerHTML = '';
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const value = localStorage.getItem(key);  
+      const element = `<div class="text-xl border-b-2 border-white">${key} : ${value} szklanek</div>`;  
+      historyPage.insertAdjacentHTML("beforeend", element)
+    }
+  }
 
 const setCounterValue = (value)=>{
     counterValue.innerHTML= value;
-    localStorage.setItem(key, value)
+    localStorage.setItem(key, value);
+    iterateLocalStorage();
 }
 setCounterValue(glasses)
 
@@ -29,3 +42,7 @@ subtractButton.addEventListener('click',()=>{
     setCounterValue(glasses);
     }
 })
+
+historyButton.addEventListener('click', () => {
+    historyPage.classList.toggle("hidden");
+  });
