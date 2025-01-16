@@ -14,15 +14,16 @@ if (localStorage.getItem(key)){
     glasses = parseInt(localStorage.getItem(key))
 }
 function iterateLocalStorage() {
-    if (!historyPage) return; 
-    historyPage.innerHTML = '';
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      const value = localStorage.getItem(key);  
-      const element = `<div class="text-xl border-b-2 border-white">${key} : ${value} szklanek</div>`;  
-      historyPage.insertAdjacentHTML("beforeend", element)
-    }
-  }
+  if (!historyPage) return; 
+  historyPage.innerHTML = '';
+
+  const sortedKeys = Object.keys(localStorage).sort().reverse();
+
+  sortedKeys.forEach(key => {
+      const value = localStorage.getItem(key);
+      const element = `<div class="text-xl border-b-2 border-white">${key} : Wypito ${value}</div>`;
+      historyPage.insertAdjacentHTML("beforeend", element);
+  });}
 
 const setCounterValue = (value)=>{
     counterValue.innerHTML= value;
